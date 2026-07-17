@@ -101,25 +101,20 @@
   }
 
   function pintarPunto(pt) {
-    // pt: {lat, lon, accuracy}. Filtra precisión mala; corta en saltos grandes.
+    // pt: {lat, lon, accuracy}. Filtra precisión mala.
     if (pt.accuracy != null && pt.accuracy > MAX_PRECISION_M) return;   // fix malo → no ensucia
     var latlon = [pt.lat, pt.lon];
-    if (!ultimoDibujado) {
-      nuevoSegmento();
-      segmentos[0].addLatLng(latlon);
-    } else {
+    // Punticos estilo CyberTracker: cada lectura del GPS = un punto (así lo ve la gerente).
+    L.circleMarker(latlon, {
+      radius: 5, color: '#1a1a1a', weight: 1.5, fillColor: '#ffe119', fillOpacity: 1,
+    }).addTo(map);
+    if (ultimoDibujado) {
       var salto = distanciaM(ultimoDibujado, pt);
-      if (salto > MAX_SALTO_M) {
-        nuevoSegmento();                       // hueco → tramo aparte, sin recta falsa
-        segmentos[segmentos.length - 1].addLatLng(latlon);
-      } else {
-        segmentos[segmentos.length - 1].addLatLng(latlon);
-        distanciaTotal += salto;
-      }
+      if (salto <= MAX_SALTO_M) distanciaTotal += salto;   // no contar los huecos
     }
     ultimoDibujado = { lat: pt.lat, lon: pt.lon };
 
-    // Marcador del auxiliar
+    // Marcador del auxiliar (posición actual, encima de los punticos)
     if (!marcador) marcador = L.circleMarker(latlon, { radius: 8, color: '#fff', weight: 2, fillColor: '#ef4444', fillOpacity: 1 }).addTo(map);
     else marcador.setLatLng(latlon);
     if (siguiendo) map.setView(latlon, Math.max(map.getZoom(), 17));
