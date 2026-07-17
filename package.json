@@ -1,0 +1,21 @@
+{
+  "name": "palmas-recorrido",
+  "version": "1.0.0",
+  "description": "App de prueba: recorridos GPS de auxiliares en segundo plano",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@capacitor-community/background-geolocation": "^1.2.26",
+    "@capacitor/android": "^6.2.1",
+    "@capacitor/cli": "^6.2.1",
+    "@capacitor/core": "^6.2.1",
+    "@capacitor/filesystem": "^6.0.4",
+    "@capacitor/share": "^6.0.4",
+    "leaflet": "^1.9.4"
+  }
+}

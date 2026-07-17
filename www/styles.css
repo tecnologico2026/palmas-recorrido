@@ -1,0 +1,68 @@
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body {
+  margin: 0; padding: 0; height: 100%; width: 100%;
+  font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+  overflow: hidden; background: #0f172a;
+}
+#map { position: absolute; inset: 0; z-index: 1; background: #1e293b; }
+
+.oculto { display: none !important; }
+
+/* Panel superior (código + intervalo) */
+.panel {
+  position: absolute; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(15, 23, 42, .92);
+  padding: calc(env(safe-area-inset-top, 0px) + 10px) 12px 10px;
+  color: #e2e8f0; backdrop-filter: blur(6px);
+  box-shadow: 0 2px 10px rgba(0,0,0,.35);
+}
+.panel .row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.panel .row:last-child { margin-bottom: 0; }
+.panel label { font-size: 15px; font-weight: 600; white-space: nowrap; }
+.panel input, .panel select {
+  flex: 1; font-size: 17px; padding: 10px 12px; border-radius: 10px;
+  border: 1px solid #334155; background: #1e293b; color: #f8fafc; min-width: 0;
+}
+.panel input:focus, .panel select:focus { outline: 2px solid #38bdf8; border-color: #38bdf8; }
+.panel.bloqueado input, .panel.bloqueado select { opacity: .6; pointer-events: none; }
+
+/* Estado de grabación */
+.estado {
+  position: absolute; left: 12px; right: 12px; z-index: 1000;
+  top: calc(env(safe-area-inset-top, 0px) + 12px);
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(16, 185, 129, .95); color: #06281d;
+  padding: 10px 14px; border-radius: 12px; font-weight: 700;
+  box-shadow: 0 4px 14px rgba(0,0,0,.35);
+}
+.estado .dot {
+  width: 12px; height: 12px; border-radius: 50%; background: #06281d;
+  animation: latido 1.2s infinite;
+}
+@keyframes latido { 0%,100% { opacity: 1; } 50% { opacity: .25; } }
+#estado-datos { margin-left: auto; font-weight: 600; font-size: 13px; }
+
+/* Botones abajo */
+#panel-bottom {
+  position: absolute; left: 0; right: 0; z-index: 1000;
+  bottom: 0; padding: 12px 14px calc(env(safe-area-inset-bottom, 0px) + 14px);
+  display: flex; flex-direction: column; gap: 10px;
+}
+.btn {
+  width: 100%; border: none; border-radius: 16px; padding: 18px;
+  font-size: 20px; font-weight: 800; color: #fff; letter-spacing: .3px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.4); cursor: pointer;
+}
+.btn:active { transform: translateY(1px); filter: brightness(.95); }
+.btn-iniciar { background: linear-gradient(135deg, #10b981, #059669); }
+.btn-terminar { background: linear-gradient(135deg, #ef4444, #b91c1c); }
+.btn-compartir { background: linear-gradient(135deg, #0ea5e9, #0369a1); font-size: 17px; padding: 14px; }
+.btn:disabled { opacity: .5; }
+
+/* Toast */
+.toast {
+  position: absolute; bottom: 140px; left: 12px; right: 12px; z-index: 1100;
+  background: rgba(15,23,42,.96); color: #f8fafc; padding: 12px 16px;
+  border-radius: 12px; font-size: 15px; text-align: center;
+  box-shadow: 0 4px 14px rgba(0,0,0,.4);
+}

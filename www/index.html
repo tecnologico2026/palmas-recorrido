@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Palmas Recorrido</title>
+  <link rel="stylesheet" href="vendor/leaflet.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Mapa a pantalla completa -->
+  <div id="map"></div>
+
+  <!-- Panel superior: código + intervalo -->
+  <div id="panel-top" class="panel">
+    <div class="row">
+      <label for="codigo">Código:</label>
+      <input id="codigo" type="text" inputmode="numeric" placeholder="ej. 9351"
+             autocomplete="off" maxlength="10">
+    </div>
+    <div class="row">
+      <label for="intervalo">Cada cuánto toma un punto:</label>
+      <select id="intervalo">
+        <option value="5">5 segundos</option>
+        <option value="10" selected>10 segundos</option>
+        <option value="15">15 segundos</option>
+        <option value="20">20 segundos</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Estado (mientras graba) -->
+  <div id="estado" class="estado oculto">
+    <span id="estado-punto" class="dot"></span>
+    <span id="estado-txt">Grabando recorrido…</span>
+    <span id="estado-datos"></span>
+  </div>
+
+  <!-- Botones grandes abajo -->
+  <div id="panel-bottom">
+    <button id="btn-iniciar" class="btn btn-iniciar">▶ Iniciar mi día</button>
+    <button id="btn-terminar" class="btn btn-terminar oculto">■ Terminar mi día</button>
+    <button id="btn-compartir" class="btn btn-compartir oculto">⤴ Compartir recorrido</button>
+  </div>
+
+  <!-- Aviso -->
+  <div id="toast" class="toast oculto"></div>
+
+  <script src="vendor/leaflet.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

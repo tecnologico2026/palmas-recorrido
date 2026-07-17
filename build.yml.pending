@@ -1,0 +1,64 @@
+name: Compilar APK
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar el código
+        uses: actions/checkout@v4
+
+      - name: Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Sincronizar Capacitor
+        run: npx cap sync android
+
+      - name: Compilar APK (debug, instalable)
+        run: |
+          cd android
+          chmod +x ./gradlew
+          ./gradlew assembleDebug --no-daemon
+
+      - name: Renombrar el APK
+        run: cp android/app/build/outputs/apk/debug/app-debug.apk palmas-recorrido.apk
+
+      - name: Publicar el APK (link fijo de descarga)
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: build-${{ github.run_number }}
+          name: Palmas Recorrido (build ${{ github.run_number }})
+          make_latest: true
+          files: palmas-recorrido.apk
+          body: |
+            APK de prueba de la app **Palmas Recorrido**.
+
+            **Descargar (link fijo, siempre la última versión):**
+            https://github.com/${{ github.repository }}/releases/latest/download/palmas-recorrido.apk
+
+      - name: Guardar también como artefacto
+        uses: actions/upload-artifact@v4
+        with:
+          name: palmas-recorrido-apk
+          path: palmas-recorrido.apk

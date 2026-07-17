@@ -1,0 +1,8 @@
+{
+  "appId": "com.palmas.recorrido",
+  "appName": "Palmas Recorrido",
+  "webDir": "www",
+  "android": {
+    "allowMixedContent": true
+  }
+}

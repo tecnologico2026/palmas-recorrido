@@ -1,0 +1,11 @@
+node_modules/
+*.apk
+.DS_Store
+
+# Android build artifacts (CI los regenera con cap sync + gradle)
+android/.gradle/
+android/build/
+android/app/build/
+android/capacitor-cordova-android-plugins/
+android/local.properties
+android/.idea/
