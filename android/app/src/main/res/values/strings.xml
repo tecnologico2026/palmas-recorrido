@@ -1,7 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">Palmas Recorrido</string>
-    <string name="title_activity_main">Palmas Recorrido</string>
-    <string name="package_name">com.palmas.recorrido</string>
-    <string name="custom_url_scheme">com.palmas.recorrido</string>
+    <string name="app_name">Palmas Campo</string>
+    <string name="title_activity_main">Palmas Campo</string>
+    <string name="package_name">com.palmas.campo.dev</string>
+    <string name="custom_url_scheme">com.palmas.campo.dev</string>
+    <string name="title_activity_servidor">Servidor</string>
+    <string name="shortcut_servidor_corto">Servidor</string>
+    <string name="shortcut_servidor_largo">Cambiar servidor</string>
 </resources>

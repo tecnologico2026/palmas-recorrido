@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0f172a">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Servidor de Palmas"
+            android:textColor="#f8fafc"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Dirección de la plataforma que abre esta app. Cámbiala solo para probar contra un servidor de desarrollo."
+            android:textColor="#94a3b8"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/aviso"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="#78350f"
+            android:padding="12dp"
+            android:textColor="#fef3c7"
+            android:textSize="14sp"
+            android:visibility="gone" />
+
+        <EditText
+            android:id="@+id/campo_url"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="#1e293b"
+            android:hint="192.168.1.50:8000"
+            android:inputType="textUri"
+            android:padding="14dp"
+            android:textColor="#f8fafc"
+            android:textColorHint="#64748b"
+            android:textSize="16sp"
+            android:importantForAutofill="no"
+            android:autofillHints="" />
+
+        <Button
+            android:id="@+id/btn_guardar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:minHeight="56dp"
+            android:text="Guardar y reiniciar" />
+
+        <Button
+            android:id="@+id/btn_restaurar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:minHeight="56dp"
+            android:text="Volver a producción" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Al guardar, la app se cierra y vuelve a abrir. Si hay un recorrido grabando, se detiene."
+            android:textColor="#64748b"
+            android:textSize="13sp" />
+    </LinearLayout>
+</ScrollView>

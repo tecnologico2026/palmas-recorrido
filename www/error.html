@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Sin conexión</title>
+  <style>
+    /* Se ve con el celular al sol y con guantes: texto grande, botón grande. */
+    body { margin: 0; padding: 28px 22px; background: #0f172a; color: #f8fafc;
+           font-family: system-ui, -apple-system, sans-serif; line-height: 1.5; }
+    h1 { font-size: 26px; margin: 0 0 6px; }
+    p { font-size: 17px; color: #cbd5e1; }
+    ol { font-size: 17px; color: #cbd5e1; padding-left: 22px; }
+    li { margin-bottom: 10px; }
+    button { width: 100%; min-height: 60px; margin-top: 26px; font-size: 19px;
+             border: 0; border-radius: 10px; background: #16a34a; color: #fff; }
+    .nota { margin-top: 26px; font-size: 14px; color: #64748b; }
+  </style>
+</head>
+<body>
+  <h1>No se pudo abrir la plataforma</h1>
+  <p>El celular no tiene las pantallas guardadas y en este momento no hay señal.</p>
+
+  <ol>
+    <li>Si estás en el lote: sigue trabajando en papel y avisa al llegar a la oficina.</li>
+    <li>Si estás donde hay wifi: conéctate y toca <strong>Reintentar</strong>.</li>
+    <li>Si vuelve a fallar: cierra la app por completo y ábrela de nuevo.</li>
+  </ol>
+
+  <button onclick="history.back()">Reintentar</button>
+
+  <p class="nota">
+    Para que esto no pase, el celular debe abrirse una vez con wifi <em>antes</em> de salir
+    a campo: ahí es cuando guarda las pantallas para trabajar sin señal.
+  </p>
+</body>
+</html>

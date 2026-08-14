@@ -1,7 +1,16 @@
 {
-  "appId": "com.palmas.recorrido",
-  "appName": "Palmas Recorrido",
+  "appId": "com.palmas.campo.dev",
+  "appName": "Palmas Campo",
   "webDir": "www",
+  "server": {
+    "allowNavigation": [
+      "palmas-34g66bccva-uc.a.run.app",
+      "*.trycloudflare.com",
+      "192.168.*",
+      "10.*"
+    ],
+    "errorPath": "error.html"
+  },
   "android": {
     "allowMixedContent": true
   }

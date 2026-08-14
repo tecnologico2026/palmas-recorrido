@@ -4,7 +4,9 @@ android {
     namespace "com.palmas.recorrido"
     compileSdk rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "com.palmas.recorrido"
+        // APK de PRUEBAS: id propio para que conviva con la app de recorrido que ya
+        // está instalada en los celulares y no la reemplace al instalarse.
+        applicationId "com.palmas.campo.dev"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

@@ -3,6 +3,7 @@
 
     <application
         android:allowBackup="true"
+        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -22,7 +23,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
+            <!-- Dejar pulsado el ícono → "Servidor" -->
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
+
         </activity>
+
+        <!-- Cambiar el servidor. Sin LAUNCHER: no sale en el cajón de aplicaciones,
+             solo por el atajo del ícono. exported porque el atajo la lanza desde fuera. -->
+        <activity
+            android:name=".ServidorActivity"
+            android:label="@string/title_activity_servidor"
+            android:exported="true" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
