@@ -129,6 +129,31 @@ no debe desaparecer. **`SesionGPS` no se borra jamás**, solo los `TrackPoint` c
 Formato: **GeoJSON** (ya existe `gps_export_geojson`, QGIS lo abre nativo). Shapefile quedaría
 para después, con `pyshp`, si el flujo del supervisor lo exige.
 
+### 5.b Mapa diario de polinización
+
+Pedido explícito: el supervisor debe poder ver los recorridos del día de polinización, como ya
+se hace con cosecha.
+
+La pantalla **ya existe y no es de cosecha**: `/labores/mapa-dia/` (`views.mapa_dia`,
+`views.mapa_dia_imagen`, render en `labores/mapa_dia.py`). `recorridos_del_dia(fecha)` toma
+**todas** las `SesionGPS` de la fecha, las agrupa por empleado y les da un color por auxiliar.
+Los recorridos de polinización aparecerían ahí solos en cuanto empiecen a sincronizar.
+
+**El bloqueador es el dato, no la pantalla.** `gps_sync` crea la sesión con
+`SesionGPS.objects.get_or_create(empleado=empleado, fecha=fecha)` — sin `ejecucion`. Ese FK
+(nullable) es lo único que ataría un recorrido a una labor, así que hoy **toda sesión que llega
+del móvil queda sin labor** y cosecha y polinización se dibujarían mezcladas en el mismo PNG.
+
+Decisión pendiente — cómo se marca la labor de un recorrido:
+
+| Opción | A favor | En contra |
+|---|---|---|
+| Mandarla desde el móvil en el sync | explícito, sin adivinar | hay que tocar el payload y la cola offline |
+| Inferirla de la programación del día | cero cambios en el móvil | falla con el trabajo no programado |
+| Campo propio en `SesionGPS` | independiente de `Ejecucion` | un campo más que mantener al día |
+
+Hasta resolverlo, filtrar por labor en el mapa no tiene de dónde filtrar.
+
 ### 6. Modelo
 
 | Cambio | Por qué |
