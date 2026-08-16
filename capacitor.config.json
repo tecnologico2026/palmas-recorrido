@@ -12,6 +12,7 @@
     "errorPath": "error.html"
   },
   "android": {
-    "allowMixedContent": true
+    "allowMixedContent": true,
+    "appendUserAgent": "PalmasCampoAPK"
   }
 }
