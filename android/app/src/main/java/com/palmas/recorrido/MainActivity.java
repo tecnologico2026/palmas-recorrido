@@ -1,5 +1,10 @@
 package com.palmas.recorrido;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.os.Bundle;
+
 import com.getcapacitor.BridgeActivity;
 import com.getcapacitor.CapConfig;
 import com.getcapacitor.Logger;
@@ -21,6 +26,44 @@ import java.nio.charset.StandardCharsets;
  * Ver ionic-team/capacitor#4164 y #7454.
  */
 public class MainActivity extends BridgeActivity {
+
+    /** Código propio para la respuesta del permiso de notificaciones (no lo usa nadie más). */
+    private static final int PERMISO_NOTIFICACIONES = 9101;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        pedirPermisoDeNotificaciones();
+    }
+
+    /**
+     * Pide POST_NOTIFICATIONS en Android 13+.
+     *
+     * El plugin de GPS de fondo NO lo pide —solo declara el alias "location"— y el manifest
+     * por sí solo no basta: desde Android 13 es un permiso de runtime. Sin él, la
+     * notificación fija de "grabando tu recorrido" no se muestra.
+     *
+     * Importa por dos motivos: es la única señal que tiene el auxiliar (y el supervisor)
+     * de que el recorrido se está grabando —"mira que salga la notificación" es el
+     * protocolo de verificación en campo—, y es lo que le dice al operario que su
+     * ubicación se está usando, que es la razón de que Android la exija.
+     *
+     * Afecta a los teléfonos NUEVOS: los Moto G05 traen Android 15. Los E30/E40 con
+     * Android 11 no pasan por aquí y muestran la notificación sin pedir nada.
+     */
+    private void pedirPermisoDeNotificaciones() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+            return;   // Android 12 o menor: la notificación sale sin permiso de runtime
+        }
+        if (checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS)
+                == PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        // Si el operario lo niega, la app sigue funcionando y el recorrido se graba igual:
+        // solo se queda sin el aviso visible. No se insiste ni se bloquea la pantalla.
+        requestPermissions(
+            new String[] { Manifest.permission.POST_NOTIFICATIONS }, PERMISO_NOTIFICACIONES);
+    }
 
     @Override
     protected void load() {

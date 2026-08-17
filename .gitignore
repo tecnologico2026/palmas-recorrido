@@ -9,3 +9,4 @@ android/app/build/
 android/capacitor-cordova-android-plugins/
 android/local.properties
 android/.idea/
+.playwright-mcp/
